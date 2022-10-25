@@ -27,16 +27,14 @@ const guessTheNumber = (number) => {
     if (number >= minNumber && number <= maxNumber) {
         const random = minNumber + Math.floor(Math.random() * (maxNumber - minNumber));
         const randomNumber = Math.round(random)
-        console.log(randomNumber)
         if (number === randomNumber) {
             return "You Win!"
         } else {
-            console.log(`You are lose, your number is ${number}, the random number is ${randomNumber}`)
+            return(`You are lose, your number is ${number}, the random number is ${randomNumber}`)
         }
     } else if (number < minNumber || number > maxNumber) {
         return new Error("Please provide number in range 1 - 10");
     } else if (typeof number !== 'number') {
-        console.log(typeof number)
         return new Error("Please provide a valid number")
     }
 }
