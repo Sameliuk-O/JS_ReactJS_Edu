@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,153 +11,211 @@
         <div class="logo-container">
             <a href="index.html" class="logo"><img src="image/FrameLogo.svg" alt="Logo"></a>
         </div>
-        <nav>
+        <div class="hamburger-menu">
+            <input id="menu__toggle" type="checkbox"/>
+            <label class="menu__btn" for="menu__toggle">
+                <span></span>
+            </label>
+
             <ul class="menu">
                 <li class="menu-list"><a href="#" class="menu-list-link">Features</a></li>
                 <li class="menu-list"><a href="#" class="menu-list-link">Integrations</a></li>
                 <li class="menu-list"><a href="#" class="menu-list-link">Pricing</a></li>
                 <li class="menu-list"><a href="#" class="menu-list-link">Company</a></li>
                 <li class="menu-list"><a href="#" class="menu-list-link">Blog</a></li>
-                <li class="menu-list"><a href="#" class="menu-list-link">Get a demo</a></li>
-                <li class="menu-list"><a href="#" class="menu-list-link">Login</a></li>
+                <li class="menu-list"><a href="#" class="menu-list-link border-block">Get a demo</a></li>
+                <li class="menu-list"><a href="#" class="menu-list-link login-icon">Login</a></li>
             </ul>
-        </nav>
+
+        </div>
     </header>
     <section class="hero-section">
-        <div class="hero-section-position-item">
-            <h1>
-                Find the right partners to fuel your business growth
-            </h1>
-            <p>
-                Join a vibrant community of MSPs to forge long-lasting relationships with partners that help you create
-                excellent customer experiences
-            </p>
-            <a href="">Register today</a>
+        <div class="container">
+            <div class="header-img-position header-first-img">
+                <img src="image/people-header.svg" alt="people">
+            </div>
+            <div class="hero-section-position-item">
+                <h1>
+                    Find the right partners to fuel your business growth
+                </h1>
+                <p>
+                    Join a vibrant community of MSPs to forge long-lasting relationships with partners that help you
+                    create excellent customer experiences
+                </p>
+                <div class="header-button">
+                    <a href="#" class="button">Register today</a>
+                </div>
+            </div>
+            <div class="header-img-position header-second-img">
+                <img src="image/man-header.svg" alt="people">
+            </div>
         </div>
+
     </section>
     <section class="services-section">
-        <h2>
-            List. Sell. Grow
-        </h2>
-        <ul>
-            <li>
-                <div>
-
-                </div>
-                <p>
-                    Be a part of the only All-In-One platform for IT services
-                </p>
-            </li>
-            <li>
-                <div>
-
-                </div>
-                <p>
-                    Come closer to finding your next customer
-                </p>
-            </li>
-            <li>
-                <div>
-
-                </div>
-                <p>
-                    Grow your business with a single click
-                </p>
-            </li>
-        </ul>
+        <div class="container">
+            <div class="services-title">
+                <h2>
+                    List. Sell. Grow
+                </h2>
+            </div>
+            <ul class="services-position">
+                <li>
+                    <div class="services-img">
+                        <img src="image/all-in-one-platform.svg" alt="All in one platform">
+                    </div>
+                    <p class="services-description">
+                        Be a part of the only All-In-One platform for IT services
+                    </p>
+                </li>
+                <li>
+                    <div class="services-img">
+                        <img src="image/find-your-next-customer.svg" alt="Search">
+                    </div>
+                    <p class="services-description">
+                        Come closer to finding your next customer
+                    </p>
+                </li>
+                <li>
+                    <div class="services-img">
+                        <img src="image/grow-your-business.svg" alt="Grow your business">
+                    </div>
+                    <p class="services-description">
+                        Grow your business with a single click
+                    </p>
+                </li>
+            </ul>
+        </div>
     </section>
     <section class="about-section">
-        <div>
-            <h3>
-                Your channel program
-                on steroids
-            </h3>
-            <p>
-                Tired of finding MSPs that can help you boost your channel sales? You’re in luck, because they’re all
-                here.
-            </p>
-            <img src="" alt="">
+        <div class="about-position">
+            <div class="about-position-block">
+                <h3 class="about-title">
+                    Your channel program </br>
+                    on steroids
+                </h3>
+                <p class="about-description">
+                    Tired of finding MSPs that can help you boost your channel sales? You’re in luck, because they’re
+                    all here.
+                </p>
+            </div>
+            <img src="image/man-search.svg" alt="man search" class="about-position-img">
         </div>
         <div>
-            <img src="" alt="">
-            <h3>
-                Become the vendor
-                everyone wants to buy from
-            </h3>
-            <p>
-                Gain brand authority and visibility with the help of the largest IT service ecosystem. Find customers
-                who are looking for your solution right now!
-            </p>
-            <a href="#">Signup now <img src="" alt=""></a>
+            <div class="about-position about-revers">
+                <img src="image/Become-about.svg" alt="Become the vendor everyone wants to buy from"
+                     class="about-position-img">
+                <div class="about-position-block">
+                    <h3 class="about-title">
+                        Become the vendor
+                        everyone wants to buy from
+                    </h3>
+                    <p class="about-description">
+                        Gain brand authority and visibility with the help of the largest IT service ecosystem. Find
+                        customers who are looking for your solution right now!
+                    </p>
+                    <div class="about-link">
+                        <a href="#" class="about-link-text right-arrow">Signup now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="about-position">
+            <div class="about-position-block">
+                <h3 class="about-title">
+                    It’s like having Your best</br>
+                    Salesman on autopilot
+                </h3>
+                <p class="about-description">
+                    Share collaterals and documents that are automatically branded. Leverage a rich partner network that
+                    sells your solution exactly the way your best salesman would.
+                </p>
+                <div class="about-link">
+                    <a href="#" class="about-link-text right-arrow">Signup now</a>
+                </div>
+            </div>
+            <img src="image/man-statistics.svg" alt="man search" class="about-position-img">
         </div>
         <div>
-            <h3>
-                It’s like having Your best
-                Salesman on autopilot
-            </h3>
-            <p>
-                Share collaterals and documents that are automatically branded. Leverage a rich partner network that
-                sells your solution exactly the way your best salesman would.
-            </p>
-            <a href="#">Signup now <img src="" alt=""></a>
-            <img src="" alt="">
+            <div class="about-position about-revers">
+                <img src="image/graphics.svg" alt="Become the vendor everyone wants to buy from"
+                     class="about-position-img">
+                <div class="about-position-block">
+                    <h3 class="about-title">
+                        Track your channel</br> performance
+                    </h3>
+                    <p class="about-description">
+                        Monitor the health and revenue of your channel program and streamline your campaign to win more
+                        customers within Zomentum.
+                    </p>
+                    <div class="about-link">
+                        <a href="#" class="about-link-text right-arrow">Signup now</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-            <img src="" alt="">
-            <h3>
-                Track your channel performance
-            </h3>
-            <p>
-                Monitor the health and revenue of your channel program and streamline your campaign to win more
-                customers within Zomentum.
-            </p>
-            <a href="#">Signup now <img src="" alt=""></a>
-        </div>
-        <div>
-            <h3>
-                Get The best version of Your sales playbook
-            </h3>
-            <p>
-                Gather insights about top channel sellers and find out what pitch and collaterals ensure maximum
-                profitability. Win happy customers with an optimized sales playbook.
-            </p>
-            <a href="#">Signup now <img src="" alt=""></a>
-            <img src="" alt="">
+        <div class="about-position">
+            <div class="about-position-block">
+                <h3 class="about-title">
+                    Get The best version of </br>
+                    Your sales playbook
+                </h3>
+                <p class="about-description">
+                    Gather insights about top channel sellers and find out what pitch and collaterals ensure maximum
+                    profitability. Win happy customers with an optimized sales playbook.
+                </p>
+                <div class="about-link">
+                    <a href="#" class="about-link-text right-arrow">Signup now </a>
+                </div>
+            </div>
+            <img src="image/playbook.svg" alt="man search" class="about-position-img">
         </div>
     </section>
-    <footer>
-        <ul>
-            <li>Product</li>
-            <li><a href="">Features</a></li>
-            <li><a href="">Pricing</a></li>
-            <li><a href="">Integrations</a></li>
-            <li><a href="">Product</a></li>
-        </ul>
-        <ul>
-            <li>Company</li>
-            <li><a href="">About us</a></li>
-            <li><a href="">Contact us</a></li>
-            <li><a href="">Submit a ticket</a></li>
-            <li><a href="">Privacy policy</a></li>
-            <li><a href="">Terms & conditions</a></li>
-        </ul>
-        <ul>
-            <li>Users</li>
-            <li><a href="">Login</a></li>
-            <li><a href="">Get a demo</a></li>
-            <li><a href="">Talk to us</a></li>
-            <li><a href="">Privacy policy</a></li>
-            <li><a href="">Terms & conditions</a></li>
-        </ul>
-        <ul>
-            <li>Guides</li>
-            <li><a href="">MSP</a></li>
-            <li><a href="">MSP Sales</a></li>
-        </ul>
-        <ul>
-            <li>Contact Us</li>
-            <li><a href="">Address</a></li>
-        </ul>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-menu">
+                <ul class="footer-menu-position">
+                    <li class="footer-menu-list-title">Product</li>
+                    <li><a href="#" class="footer-menu-list-link">Features</a></li>
+                    <li><a href="#" class="footer-menu-list-link">Pricing</a></li>
+                    <li><a href="#" class="footer-menu-list-link">Integrations</a></li>
+                    <li><a href="#" class="footer-menu-list-link">Product</a></li>
+                </ul>
+                <ul class="footer-menu-position">
+                    <li class="footer-menu-list-title">Company</li>
+                    <li><a href="#" class="footer-menu-list-link ">About us</a></li>
+                    <li><a href="#" class="footer-menu-list-link ">Contact us</a></li>
+                    <li><a href="#" class="footer-menu-list-link ">Submit a ticket</a></li>
+                    <li><a href="#" class="footer-menu-list-link footer-menu-list-link-mobile-disable">Privacy
+                        policy</a></li>
+                    <li><a href="#" class="footer-menu-list-link footer-menu-list-link-mobile-disable">Terms &
+                        conditions</a></li>
+                </ul>
+                <ul class="footer-menu-position">
+                    <li class="footer-menu-list-title">Users</li>
+                    <li><a href="#" class="footer-menu-list-link ">Login</a></li>
+                    <li><a href="#" class="footer-menu-list-link ">Get a demo</a></li>
+                    <li><a href="#" class="footer-menu-list-link ">Talk to us</a></li>
+                    <li><a href="#" class="footer-menu-list-link footer-menu-list-link-mobile-disable">Privacy
+                        policy</a></li>
+                    <li><a href="#" class="footer-menu-list-link footer-menu-list-link-mobile-disable">Terms &
+                        conditions</a></li>
+                </ul>
+                <ul class="footer-menu-position">
+                    <li class="footer-menu-list-title">Guides</li>
+                    <li><a href="#" class="footer-menu-list-link ">MSP</a></li>
+                    <li><a href="#" class="footer-menu-list-link ">MSP Sales</a></li>
+                </ul>
+                <ul class="footer-menu-position">
+                    <li class="footer-menu-list-title">Contact Us</li>
+                    <li><a href="#" class="footer-menu-list-link ">Address</a></li>
+                </ul>
+            </div>
+            <div class="info-block">
+                <p class="info-block-text">© 2020 Pactora Inc. All rights reserved.</p>
+                <p class="info-block-text"> Follow us on social</p>
+            </div>
+        </div>
     </footer>
 </div>
 
