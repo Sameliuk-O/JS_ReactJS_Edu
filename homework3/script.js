@@ -1,3 +1,5 @@
+//HOF
+
 function validCallbackName(item) {
     return console.log(item)
 }
@@ -17,8 +19,6 @@ function validMethodName(array, callback) {
 
 validMethodName(["my", "name", "is", "Vasya"], validCallbackName);
 
-//
-
 function validCallbackNumber(item) {
     return console.log(item)
 }
@@ -33,9 +33,6 @@ function validMethodNumber(array, callback) {
 }
 
 validMethodNumber([1, 2, 3], validCallbackNumber);
-
-
-//
 
 function validCallbackObject(item) {
     return console.log(item)
@@ -56,8 +53,6 @@ validMethodObject([{
     name: 'Aaron'
 }], validCallbackObject);
 
-//
-
 function reversCallbackItem(item) {
     return console.log(item)
 }
@@ -75,7 +70,7 @@ function reversMethodItem(array, callback) {
 
 reversMethodItem(['abc', '123'], reversCallbackItem);
 
-//
+//this 3.1
 
 const rectangleFunction = (width, height) => {
     const rectangle = {
@@ -89,7 +84,7 @@ const rectangleFunction = (width, height) => {
 }
 console.log(rectangleFunction(5, 7))
 
-//
+//this 3.2
 
 const price = {
     price: 10,
@@ -105,7 +100,7 @@ const price = {
 price.getPrice();
 price.getPriceWithDiscount();
 
-//
+//this3.3
 
 const numerator = {
     value: 1,
@@ -126,7 +121,7 @@ const numerator = {
 numerator.double().plusOne().plusOne().minusOne();
 console.log(numerator.value)
 
-//
+//this 3.4
 
 const element = {
     height: 25,
@@ -137,7 +132,7 @@ const element = {
 const getElementHeight = element.getHeight();
 console.log(getElementHeight);
 
-//
+// row function 4
 
 const convertToObject = (num) => {
     return {
@@ -146,7 +141,7 @@ const convertToObject = (num) => {
     };
 }
 
-//
+//Closser 5.1
 
 function minus(valueFirst) {
     if (valueFirst === undefined) {
@@ -170,9 +165,8 @@ function minus(valueFirst) {
 
 console.log(minus(5)(0))
 
-
+// Closser 5.2
 let result = 0
-
 const multiplyMaker = (number) => {
     return function (nextNumber) {
         if (result === 0) {
@@ -191,7 +185,7 @@ console.log(multiply(1))
 console.log(multiply(3))
 console.log(multiply(10))
 
-
+//Closser 5.3
 function rowOperation(value) {
     this.addRow = function () {
         if (typeof value === "number") {
@@ -215,7 +209,7 @@ console.log(module.addRow());
 console.log(module.getRow());
 console.log(module.lengthRow())
 
-//
+// Closser 5.4
 
 function Calculation() {
     let value = 0;
@@ -236,7 +230,6 @@ function Calculation() {
         multiply: (thirdNumber) => {
             value *= thirdNumber;
             return calc
-
         },
         getValue: () => {
             return value;
@@ -254,20 +247,18 @@ console.log(modules.getValue());
 
 console.log(modules.addValue(5).sum(5).degree(2).getValue())
 
-//
+// Function sum 6
 function sumCalculation() {
-    return function add(n) {
-        const func = function (x) {
-            return add(n + x);
+    return function addNumber(n) {
+        const sumFunction = function (x) {
+            return addNumber(n + x);
         };
 
-        func.toString = function () {
+        sumFunction.toString = function () {
             return n;
         };
-
-        return func;
+        return sumFunction;
     }
-
 }
 
 let sum = sumCalculation();
