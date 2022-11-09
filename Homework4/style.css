@@ -1,0 +1,55 @@
+*{
+    list-style: none;
+}
+
+body{
+    background-color: #F5F3E1;
+}
+
+.container{
+    text-align: center;
+}
+
+.title {
+color: #fff;
+}
+
+.position{
+    display: flex;
+
+}
+.draggable{
+    display: flex;
+    justify-content: flex-start;
+    margin: 10px 0;
+}
+
+.position_block{
+    padding: 30px 50px;
+}
+
+
+.list-label, .time{
+    font-size: 25px;
+}
+
+.checkbox{
+    margin-right: 10px;
+}
+
+.time{
+    padding: 0 50px;
+}
+
+input{
+    padding: 10px;
+    border-radius: 15px;
+    margin: 0 20px;
+}
+
+button{
+    padding: 5px  15px;
+    margin: 0 5px;
+    border-radius: 10px;
+    font-size: 15px;
+}
