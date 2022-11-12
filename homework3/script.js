@@ -1,48 +1,44 @@
 //HOF
 
-function validCallbackName(item) {
-    return console.log(item)
+function validCallbackName(item, array) {
+    const n = array[item].split("");
+    const firstLater = n[0].toUpperCase();
+    const rest = [...n]
+    rest.splice(0, 1)
+    return array[item] = [firstLater, ...rest].join("")
 }
 
 function validMethodName(array, callback) {
-    for (let i = 0; i <= array.length; i++) {
-        if ('string' === typeof array[i]) {
-            const n = array[i].split("");
-            const firstLater = n[0].toUpperCase();
-            const rest = [...n];
-            rest.splice(0, 1);
-            array[i] = [firstLater, ...rest].join("")
-        }
+    for (let i = 0; i < array.length; i++) {
+        callback(i, array)
     }
-    callback(array.join(""))
+    return console.log(array.join(""))
 }
 
 validMethodName(["my", "name", "is", "Vasya"], validCallbackName);
 
-function validCallbackNumber(item) {
-    return console.log(item)
+function validCallbackNumber(array, item) {
+    return array[item] = array[item] * 100;
 }
 
 function validMethodNumber(array, callback) {
-    for (let i = 0; i <= array.length; i++) {
-        if ("number" === typeof array[i]) {
-            array[i] = array[i] * 100;
-        }
+    for (let i = 0; i < array.length; i++) {
+        callback(array, i)
     }
-    callback(array.join(', '))
+    return console.log(array.join(', '))
 }
 
 validMethodNumber([1, 2, 3], validCallbackNumber);
 
-function validCallbackObject(item) {
-    return console.log(item)
+function validCallbackObject(item, array) {
+    return array[item] = `${array[item].name} is ${array[item].age}`
 }
 
 function validMethodObject(array, callback) {
     for (let i = 0; i < array.length; i++) {
-        array[i] = `${array[i].name} is ${array[i].age}`
+        callback(i, array)
     }
-    callback(array.join(', '))
+    return console.log(array.join(', '))
 }
 
 validMethodObject([{
@@ -53,19 +49,17 @@ validMethodObject([{
     name: 'Aaron'
 }], validCallbackObject);
 
-function reversCallbackItem(item) {
-    return console.log(item)
+function reversCallbackItem(item, array) {
+    const n = array[item].split("");
+    const firstLater = n.reverse();
+    return array[item] = firstLater.join("")
 }
 
 function reversMethodItem(array, callback) {
-    for (let i = 0; i <= array.length; i++) {
-        if ('string' === typeof array[i]) {
-            const n = array[i].split("");
-            const firstLater = n.reverse();
-            array[i] = firstLater.join("")
-        }
+    for (let i = 0; i < array.length; i++) {
+        callback(i, array)
     }
-    callback(array.join(", "))
+    return console.log(array.join(", "))
 }
 
 reversMethodItem(['abc', '123'], reversCallbackItem);
@@ -94,11 +88,11 @@ const price = {
     },
     getPriceWithDiscount: function () {
         let discount = parseInt(this.discount) / 100;
-        return (this.price - (this.price * discount));
+        return (this.price - (this.price * discount)).toFixed(2);
     },
 };
-price.getPrice();
-price.getPriceWithDiscount();
+console.log(price.getPrice());
+console.log(price.getPriceWithDiscount());
 
 //this3.3
 
@@ -143,31 +137,22 @@ const convertToObject = (num) => {
 
 //Closser 5.1
 
-function minus(valueFirst) {
-    if (valueFirst === undefined) {
-        return function (valueSecond) {
-            if (valueSecond === undefined) {
-                return 0
-            } else {
-                return 0 - valueSecond;
-            }
-        }
-    } else {
-        return function (valueSecond) {
-            if (valueSecond === undefined) {
-                return valueFirst - 0;
-            } else {
-                return valueFirst - valueSecond;
-            }
+function minus(valueFirst = 0) {
+    return function (valueSecond) {
+        if (valueSecond === undefined) {
+            return valueFirst;
+        } else {
+            return valueFirst - valueSecond;
         }
     }
 }
 
-console.log(minus(5)(0))
+console.log(minus(75)(7))
 
-// Closser 5.2
-let result = 0
+// // Closser 5.2
+
 const multiplyMaker = (number) => {
+    let result = 0;
     return function (nextNumber) {
         if (result === 0) {
             result = number * nextNumber;
@@ -189,7 +174,11 @@ console.log(multiply(10))
 function rowOperation(value) {
     this.addRow = function () {
         if (typeof value === "number") {
-            return value.toString()
+            value = value.toString()
+            return value
+        } else if (value === "undefined") {
+
+            return ""
         } else {
             return value
         }
@@ -204,7 +193,7 @@ function rowOperation(value) {
     }
 }
 
-let module = new rowOperation("Add row");
+let module = new rowOperation(898);
 console.log(module.addRow());
 console.log(module.getRow());
 console.log(module.lengthRow())
@@ -248,20 +237,16 @@ console.log(modules.getValue());
 console.log(modules.addValue(5).sum(5).degree(2).getValue())
 
 // Function sum 6
-function sumCalculation() {
-    return function addNumber(n) {
-        const sumFunction = function (x) {
-            return addNumber(n + x);
-        };
 
-        sumFunction.toString = function () {
-            return n;
-        };
-        return sumFunction;
+const sum = (...item) => {
+    let result = item.reduce((a, b) => a + b, 0)
+    return function (...args) {
+        let anotherNumber = args.reduce((a, b) => a + b, 0)
+        if (anotherNumber) {
+            return sum(result + anotherNumber)
+        }
+        return result
     }
 }
 
-let sum = sumCalculation();
-
-
-console.log(+sum(1)(2)(5)(10));
+console.log(sum(10)(17)());
