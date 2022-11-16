@@ -1,11 +1,31 @@
 const BUTTON_CREATE_ITEM = document.querySelector('#create-item');
+const KEYPRESS_CREATE_INPUT = document.querySelector('input');
+const KEYPRESS_SAVE_INPUT = document.querySelector('.list-input')
 
-BUTTON_CREATE_ITEM.addEventListener('click', () => {
+const createNewItem = () => {
     const newItem = document.querySelector('.input').value;
     if (newItem !== '') {
         createNewItemTodo(newItem);
     }
+}
+
+const createNewItemByKeypress = (value) => {
+    value.addEventListener('keypress', () => {
+        if (event.key === "Enter") {
+            createNewItem()
+        }
+
+    })
+}
+
+
+
+BUTTON_CREATE_ITEM.addEventListener('click', () => {
+   createNewItem()
 })
+
+createNewItemByKeypress(KEYPRESS_CREATE_INPUT);
+
 
 const handleChangeCheckbox = (isChecked, checkbox, label, time) => {
     if (isChecked) {
@@ -33,6 +53,7 @@ const createNewItemTodo = (value) => {
 
     label.innerText = value;
     labelInput.value = value;
+    labelInput.className = "list-input";
     label.className = "list-label"
     saveEdit.innerText = "Save"
     saveEdit.style.display = "none";
