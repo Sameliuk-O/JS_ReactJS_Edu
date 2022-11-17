@@ -1,6 +1,13 @@
 const BUTTON_CREATE_ITEM = document.querySelector('#create-item');
 const KEYPRESS_CREATE_INPUT = document.querySelector('input');
-const KEYPRESS_SAVE_INPUT = document.querySelector('.list-input')
+
+let settingsDate = {
+    time: "numeric",
+    year: "numeric",
+    month: "2-digit",
+    day: "numeric",
+    weekday: "short",
+};
 
 const createNewItem = () => {
     const newItem = document.querySelector('.input').value;
@@ -18,14 +25,11 @@ const createNewItemByKeypress = (value) => {
     })
 }
 
-
-
 BUTTON_CREATE_ITEM.addEventListener('click', () => {
    createNewItem()
 })
 
 createNewItemByKeypress(KEYPRESS_CREATE_INPUT);
-
 
 const handleChangeCheckbox = (isChecked, checkbox, label, time) => {
     if (isChecked) {
@@ -91,7 +95,8 @@ const createNewItemTodo = (value) => {
     });
 
     saveFunction(saveEdit, editItem, labelInput, label)
-    time.innerText = new Date().toISOString();
+    saveInputKeypress(saveEdit,editItem, labelInput, label)
+    time.innerText = new Date().toLocaleTimeString('en', settingsDate);
     editFunction(editItem, saveEdit, labelInput);
 
     li.setAttributeNode(attr);
@@ -113,26 +118,31 @@ const sort = (typeSort) => {
 
     arrLabel.forEach(element => arrValueLabel.push(arrLabel));
 
-    if (typeSort === "ABC") {
-        result = Array.from(arrLabel).sort((a, b) => {
-                return a.querySelector('label').innerText.localeCompare(b.querySelector('label').innerText);
-            }
-        )
-    } else if (typeSort === "CBA") {
-        result = Array.from(arrLabel).sort((a, b) => {
-                return b.querySelector('label').innerText.localeCompare(a.querySelector('label').innerText);
-            }
-        )
-    } else if (typeSort === "Date") {
-        result = Array.from(arrLabel).sort((a, b) => {
-                return new Date(b.querySelector("span").innerText) - new Date(a.querySelector("span").innerText);
-            }
-        )
-    } else if (typeSort === "DateRevers") {
-        result = Array.from(arrLabel).sort((a, b) => {
-                return new Date(a.querySelector("span").innerText) - new Date(b.querySelector("span").innerText);
-            }
-        )
+    switch (typeSort){
+        case "ABC":
+            result = Array.from(arrLabel).sort((a, b) => {
+                    return a.querySelector('label').innerText.localeCompare(b.querySelector('label').innerText);
+                }
+            );
+            break;
+        case "CBA":
+            result = Array.from(arrLabel).sort((a, b) => {
+                    return b.querySelector('label').innerText.localeCompare(a.querySelector('label').innerText);
+                }
+            )
+            break;
+        case "Date":
+            result = Array.from(arrLabel).sort((a, b) => {
+                    return new Date(b.querySelector("span").innerText) - new Date(a.querySelector("span").innerText);
+                }
+            )
+            break;
+        case  "DateRevers":
+            result = Array.from(arrLabel).sort((a, b) => {
+                    return new Date(a.querySelector("span").innerText) - new Date(b.querySelector("span").innerText);
+                }
+            )
+            break;
     }
 
     while (list.firstChild) {
@@ -158,6 +168,17 @@ const saveFunction = (saveEdit, editItem, labelInput, label) => {
     });
 }
 
+const saveInputKeypress = (saveEdit, editItem, labelInput, label) => {
+    labelInput.addEventListener('keypress', (event) => {
+        if(event.key === "Enter"){
+            editItem.style.display = "block"
+            saveEdit.style.display = "none"
+            labelInput.style.display = "none"
+            label.innerText = labelInput.value
+        }
+    });
+}
+
 const editFunction = (editItem, saveEdit, labelInput) => {
     editItem.addEventListener('click', (event) => {
         editItem.style.display = "none"
@@ -173,7 +194,9 @@ const dragOver = (e) => {
     if (isBefore(selected, e.target)) {
         e.target.parentNode.insertBefore(selected, e.target)
     } else {
-        e.target.parentNode.insertBefore(selected, document.getElementById(`${e.target.id}`).nextSibling)
+        if(document.getElementById(`${e.target.id}`)){
+            e.target.parentNode.insertBefore(selected, document.getElementById(`${e.target.id}`).nextSibling)
+        }
     }
 }
 
