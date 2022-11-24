@@ -77,7 +77,7 @@ isSorted([3, 9, 9, 10]);
 const reverse = (string) => {
     let reverseString = "";
     if (string.length === 0) {
-        return `''`;
+        return "";
     } else {
         for (let i = string.length - 1; i >= 0; i--) {
             reverseString += string[i];
@@ -122,16 +122,16 @@ isPalindrome('A man a plan a canal Panama');
  *  the missing number in the sequence (there are either no missing numbers, or exactly one missing number). Can you do
  *  it in O(N) time? Hint: There’s a clever formula you can use.*/
 
-const missing = (array, callback) => {
+const missing = (array) => {
     let missingArray = 1;
     for (let i = 1; i <= array.length; i++) {
-        if (callback(array, i) === -1) {
+        if (indexOf(array, i) === -1) {
             return missingArray = i;
         }
     }
 }
 
-missing([1, 2, 3, 5, 7, 6, 8], indexOf);
+missing([1, 2, 3, 5, 7, 6, 8]);
 
 /** 2.7 isBalanced - Takes a string and returns true or false indicating whether its curly braces are balanced.*/
 
