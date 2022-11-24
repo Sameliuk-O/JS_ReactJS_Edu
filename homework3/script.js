@@ -138,12 +138,8 @@ const convertToObject = (num) => {
 //Closser 5.1
 
 function minus(valueFirst = 0) {
-    return function (valueSecond) {
-        if (valueSecond === undefined) {
-            return valueFirst;
-        } else {
-            return valueFirst - valueSecond;
-        }
+    return function (valueSecond = 0) {
+        return valueFirst - valueSecond;
     }
 }
 
@@ -151,15 +147,14 @@ console.log(minus(75)(7))
 
 // // Closser 5.2
 
-const multiplyMaker = (number) => {
-    let result = 0;
+const multiplyMaker = (number = 0) => {
     return function (nextNumber) {
-        if (result === 0) {
-            result = number * nextNumber;
-            return result;
+        if (number === 0) {
+            number = number * nextNumber;
+            return number;
         } else {
-            result = result * nextNumber
-            return result
+            number = number * nextNumber
+            return number
         }
     };
 }
