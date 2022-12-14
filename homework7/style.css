@@ -1,0 +1,28 @@
+.block_tamagotchi{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    width: 500px;
+}
+
+.block_game_tamagotchi{
+    margin: 0 auto;
+}
+
+.block_game_tamagotchi{
+margin: 8px 0;
+}
+
+.up_tamagochi{
+    padding: 8px 20px;
+    margin-right: 16px;
+    border-radius: 10px;
+    background-color: bisque;
+}
+
+.progress_bar_element{
+    height: 40px;
+    width: 380px;
+    margin-bottom: -12px;
+}
