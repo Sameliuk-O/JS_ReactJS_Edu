@@ -14,7 +14,7 @@
 margin: 8px 0;
 }
 
-.up_tamagochi{
+.up_tamagochi, .restart_game{
     padding: 8px 20px;
     margin-right: 16px;
     border-radius: 10px;
@@ -25,4 +25,8 @@ margin: 8px 0;
     height: 40px;
     width: 380px;
     margin-bottom: -12px;
+}
+
+.actions_tamagotchi{
+    margin: 0 auto;
 }

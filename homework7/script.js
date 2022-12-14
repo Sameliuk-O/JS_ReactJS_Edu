@@ -2,6 +2,7 @@ const TAMAGOTCHI_CONTAINER = document.getElementById("block-tamagotchi");
 
 
 const ACTIONS_TAMAGOTCHI = document.createElement('div');
+ACTIONS_TAMAGOTCHI.className = "actions_tamagotchi";
 const IMAGE_TAMAGOTCHI = document.createElement("img");
 IMAGE_TAMAGOTCHI.src = "image/noun-laughing-2203586.svg";
 IMAGE_TAMAGOTCHI.alt = "happy";
