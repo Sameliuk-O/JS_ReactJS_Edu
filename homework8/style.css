@@ -1,0 +1,13 @@
+.block-complete-form{
+    display: flex;
+    justify-content: center;
+}
+
+.user-name{
+    display: flex;
+    justify-content: center;
+}
+
+.block-first-name, .block-last-name{
+    padding: 15px 20px;
+}
