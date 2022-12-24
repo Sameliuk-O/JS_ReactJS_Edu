@@ -1,0 +1,12 @@
+.rectangle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 15% auto;
+    width: 1000px;
+    height: 600px;
+    border-radius: 10px;
+
+
+}
+

@@ -1,0 +1,11 @@
+.label-average, .label-dominant{
+   margin-left: 30px;
+}
+
+.label-average{
+   margin-top: 30px;
+}
+
+.label-dominant{
+   margin-bottom: 30px;
+}
