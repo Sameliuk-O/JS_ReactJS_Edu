@@ -1,0 +1,13 @@
+.FormField {
+    padding: 8px 10px;
+}
+
+.FormField label {
+
+    margin-right: 8px;
+}
+
+.FormField input, .FormField select {
+    padding-left: 8px;
+    border-radius: 5px;
+}
