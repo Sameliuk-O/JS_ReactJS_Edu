@@ -1,4 +1,4 @@
-import { useId} from "react";
+import {useId} from "react";
 import {Input} from "./Input";
 import {PasswordInput} from "./PasswordInput";
 import {Checkbox} from "./Checkbox";
@@ -8,8 +8,8 @@ import {Phone} from "./Phone";
 import {Radio} from "./Radio";
 import {Checkboxes} from "./Checkboxes";
 import React from "react";
-import ("../style/form-field.css")
 
+import ("../style/form-field.css")
 
 
 export const FormField = ({

@@ -1,7 +1,13 @@
 import {Form} from "./Form";
 import {FormField} from "./FormField";
 import {useRef, useState} from "react";
-import {regexpEmail, regexpName, regexpPassword, regexpPhoneNumber} from "../constants/regExp";
+import {
+    EMAILREGEXP,
+    NAMEREGEXP,
+    PASSWORDREGEXP,
+    PHONENUMBERREGEXP,
+
+} from "../constants/regExp";
 import {useContext} from "react";
 import React from "react";
 import {FormUserContext} from "../App";
@@ -19,8 +25,6 @@ export const LoginForm = () => {
         phone,
         password,
         confirmPassword,
-        gender,
-        race,
         prefer,
     } = user;
     const [isYourFormChecked, setIsYourFormChecked] = useState(true);
@@ -80,13 +84,13 @@ export const LoginForm = () => {
 
     const onSubmit = () => {
 
-        const isErrorFirstName = regExpInput(regexpName, firstName, "firstName");
+        const isErrorFirstName = regExpInput(NAMEREGEXP, firstName, "firstName");
         if (isErrorFirstName) {
             errorsState.push('firstName')
         } else {
             errorsState = [...errorsState].filter((el) => el !== 'firstName');
         }
-        const isErrorLastName = regExpInput(regexpName, lastName, "lastName");
+        const isErrorLastName = regExpInput(NAMEREGEXP, lastName, "lastName");
         if (isErrorLastName) {
             errorsState.push('lastName')
         } else {
@@ -94,7 +98,7 @@ export const LoginForm = () => {
 
         }
 
-        const isErrorTitle = regExpInput(regexpName, title, "title");
+        const isErrorTitle = regExpInput(NAMEREGEXP, title, "title");
         if (isErrorTitle) {
             errorsState.push('title')
         } else {
@@ -111,25 +115,25 @@ export const LoginForm = () => {
 
         }
 
-        const isErrorEmail = regExpInput(regexpEmail, email, "email");
+        const isErrorEmail = regExpInput(EMAILREGEXP, email, "email");
         if (isErrorEmail) {
             errorsState.push('email')
         } else {
             errorsState = [...errorsState].filter((el) => el !== 'email');
         }
-        const isErrorPassword = regExpInput(regexpPassword, password, "password")
+        const isErrorPassword = regExpInput(PASSWORDREGEXP, password, "password")
         if (isErrorPassword) {
             errorsState.push('password')
         } else {
             errorsState = [...errorsState].filter((el) => el !== 'password');
         }
-        const isErrorConfirmPassword = regExpInput(regexpPassword, confirmPassword, "confirmPassword")
+        const isErrorConfirmPassword = regExpInput(PASSWORDREGEXP, confirmPassword, "confirmPassword")
         if (isErrorConfirmPassword) {
             errorsState.push('confirmPassword')
         } else {
             errorsState = [...errorsState].filter((el) => el !== 'confirmPassword');
         }
-        const isErrorPhone = regExpInput(regexpPhoneNumber, phone, "phone")
+        const isErrorPhone = regExpInput(PHONENUMBERREGEXP, phone, "phone")
         if (isErrorPhone) {
             errorsState.push('phone')
         } else {
@@ -170,7 +174,6 @@ export const LoginForm = () => {
     const formRef = useRef();
 
     return (
-
         <>
             <Form onSubmit={onSubmit} style={{maxWidth: "26rem", margin: "2rem auto"}} ref={formRef}>
                 <fieldset>
@@ -331,10 +334,13 @@ export const LoginForm = () => {
                     </button>
                 </fieldset>
             </Form>
-            <button onClick={() => {
-                formRef.current?.submit()
-            }}>Submit Form
-            </button>
+            <div style={{"margin": "0 45%"}}>
+                <button onClick={() => {
+                    formRef.current?.submit()
+                }}>Submit Form
+                </button>
+            </div>
+
         </>
     )
 }
