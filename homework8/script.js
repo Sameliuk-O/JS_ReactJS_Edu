@@ -1,7 +1,8 @@
-const regexpName = /^[A-Z][a-z]+$/
-const regexpPhoneNumber = /^[^+]?(\d{2})?(097|098|050|063|073|095|055|066|067|068|093|096|099)(\s|-)?\d{7}$/i
-const regexpEmail = /^[A-Z]+[A-Z \d.]+@[A-Z\d-]+.[A-Z]{2,}$/i
-const regexpPassword = /^(?=.*[!@#$&*])(?=[A-Z]*\d).{8,}$/i
+const NAME_REGEXP = /^[A-Z][a-z]+$/
+const PHONE_NUMBER_REGEXP = /^[^+]?(\d{2})?(097|098|050|063|073|095|055|066|067|068|093|096|099)(\s|-)?\d{7}$/i
+const EMAIL_REGEXP = /^[A-Z]+[A-Z \d.]+@[A-Z\d-]+.[A-Z]{2,}$/i
+// const PASSWORD_REGEXP = /^(?=.*[!@#$&*])(?=[A-Z]*\d).{8,}$/i
+const PASSWORD_REGEXP = /(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z!@#$%^&*]{8,}/g
 
 const form = document.getElementById("user_login_form");
 const block = document.getElementById("block_form")
@@ -27,104 +28,177 @@ document.forms.publish.onsubmit = function (e) {
     const password = this.password.value;
     const confirmPassword = this.confirmPassword.value;
 
-    if (phoneNumber.length === 10){
+    if (phoneNumber.length === 10) {
         phoneNumber = "38" + phoneNumber
     }
 
 
     const isUserFirstName = (value, element) => {
-        if (regexpName.test(value)) {
+        if (NAME_REGEXP.test(value)) {
 
             element.style.border = "2px solid green"
-            blockFirstName.innerText =  ""
+            blockFirstName.innerText = ""
 
             return true
-        }else{
+        } else {
             element.style.border = "2px solid red"
 
-            blockFirstName.innerText =  "write valid Name*"
+            if (value.length === 0) {
+                blockFirstName.innerText = "Ваше ім'я має містити дві та більше букв та починатися з великої літери*"
+            } else if (value.length < 2 && value.length > 0) {
+                blockFirstName.innerText = "Ваше ім'я має містити дві та більше букв*"
+            } else if (value.length >= 2 && value[0] !== value[0].toUpperCase()) {
+                blockFirstName.innerText = "Ваше ім'я має починатися з великої літери*"
+            }
+
+
             blockFirstName.style.color = "red"
         }
     }
 
     const isUserLastName = (value, element) => {
-        if (regexpName.test(value)) {
+        if (NAME_REGEXP.test(value)) {
 
             element.style.border = "2px solid green"
-            blockFirstName.innerText =  ""
+            blockLastName.innerText = ""
             return true
-        }else{
-
+        } else {
             element.style.border = "2px solid red"
-
-            blockLastName.innerText =  `write valid Name*`
+            if (value.length === 0) {
+                blockLastName.innerText = "Ваше прізвище має містити дві та більше букв та починатися з великої літери*"
+            } else if (value.length < 2 && value.length > 0) {
+                blockLastName.innerText = "Ваше прізвище має містити дві та більше букв*"
+            } else if (value.length >= 2 && value[0] !== value[0].toUpperCase()) {
+                blockLastName.innerText = "Ваше прізвище має починатися з великої літери*"
+            }
             blockLastName.style.color = "red"
         }
     }
 
     const isPhoneNumber = (phone, element) => {
-        if (regexpPhoneNumber.test(phone)) {
-            if (phone.length === 10){
+        const arrayRegionNumber = ["097", "098", "050", "063", "073", "095", "055", "066", "067", "068", "093", "096", "099"]
+
+        if (PHONE_NUMBER_REGEXP.test(phone)) {
+            if (phone.length === 10) {
                 phone = "38" + phone
 
                 element.style.border = "2px solid green"
-                blockFirstName.innerText =  ""
+                blockFirstName.innerText = ""
                 return true
-            }else if (phone.length === 12){
+            } else if (phone.length === 12) {
 
                 element.style.border = "2px solid green"
-                blockFirstName.innerText =  ""
+                blockFirstName.innerText = ""
+
+
                 return true
             }
-        }else{
+        } else {
             element.style.border = "2px solid red"
 
-            blockPhoneNumber.innerText =  `write valid Phone number*`
+            if (phone.length !== 10 && phone.length !== 12) {
+                blockPhoneNumber.innerText = `Ваш номер має містити 10 символів або 12 символів`
+            } else if (typeof phone !== "number") {
+                blockPhoneNumber.innerText = `Ваш номер має містити тільки числа`
+            }
+            if (phone.length === 10) {
+                const valueRegionNumberInput = phone[0] + phone[1] + phone[2]
+                arrayRegionNumber.forEach(el => {
+                    if (valueRegionNumberInput !== el) {
+                        blockPhoneNumber.innerText = `Ваш номер має містити тільки номера операторів, обслуговуючихся в Україні`
+                    }
+                })
+            }
+            if (phone.length === 12) {
+                const valueRegionNumberInput = phone[2] + phone[3] + phone[4]
+                arrayRegionNumber.forEach(el => {
+                    if (valueRegionNumberInput !== el) {
+                        blockPhoneNumber.innerText = `Ваш номер має містити тільки номера операторів, обслуговуючихся в Україні`
+                    }
+                })
+            }
+
+
             blockPhoneNumber.style.color = "red"
         }
     }
 
     const isEmail = (email, element) => {
-        if (regexpEmail.test(email)) {
+        const firstElementInEmail = (email.match(/^\d/) || email.match(/^[!@#$%^&*.]/))
+
+
+        const splitEmail = email.split('@')[1]
+
+        const dotElementInEmail = [...splitEmail].filter(x => x === ".").length
+
+        if (EMAIL_REGEXP.test(email)) {
 
             element.style.border = "2px solid green"
-            blockFirstName.innerText =  ""
+            blockEmail.innerText = ""
             return true
-        }else{
+        } else {
+            if (typeof Number(email[0]) === email[0]) {
+                blockEmail.innerText = `Пошта не має починатися з числа*`
+            }else if (dotElementInEmail >1){
+                blockEmail.innerText = `Пошта має містити лише одну крапку після @*`
+            }else{
+                blockEmail.innerText = "друга частина повинна містити літери"
+            }
+
             element.style.border = "2px solid red"
-            blockEmail.innerText =  `write valid Email*`
             blockEmail.style.color = "red"
         }
     }
 
     const isPassword = (pass, confirmPass, element) => {
-        if (regexpPassword.test(pass)) {
+        const specialCharactersArr = ["!", "@", "#", "$", "%", "^", "&", "*"]
+
+        if (PASSWORD_REGEXP.test(pass)) {
 
             element.style.border = "2px solid green"
-            blockFirstName.innerText =  ""
+            blockPassword.innerText = ""
 
             if (pass === confirmPass) {
 
                 inputUserConfirmPassword.style.border = "2px solid green"
-                blockConfirmPassword.innerText =  ""
+                blockConfirmPassword.innerText = ""
                 return true
-            }
-            else{
+            } else {
                 inputUserConfirmPassword.style.border = "2px solid red"
-                blockConfirmPassword.innerText =  `write valid Confirm Password*`
+                blockConfirmPassword.innerText = `Перевірка пароль має співпадати з паролем *`
                 blockConfirmPassword.style.color = "red"
             }
-        }else{
+        } else {
             element.style.border = "2px solid red"
-            blockPassword.innerText =  `write valid Password*`
+
+            const passwordLower = pass.toLowerCase()
+            const passwordHeight = pass.toUpperCase()
+
+            if (pass.length < 8) {
+                blockPassword.innerText = `Пароль має містити 8 та більше символів*`
+            } else if (passwordLower === pass) {
+                blockPassword.innerText = `Пароль має містити одну або більше великих літер*`
+            } else if (passwordHeight === pass) {
+                blockPassword.innerText = `Пароль має містити одну або більше малих літер*`
+            } else {
+                const passwordValueArray = pass.split('')
+                for (let i = 0; i < passwordValueArray.length; i++) {
+                    for (let j = 0; j < specialCharactersArr.length; j++) {
+                        if (passwordValueArray[i] === specialCharactersArr[j]) {
+                            blockPassword.innerText = `Пароль має містити один або більше спецсимволів*`
+                        }
+                    }
+                }
+            }
+
             blockPassword.style.color = "red"
         }
 
     }
 
     const allForm = () => {
-        if (regexpName.test(firstName) && regexpName.test(lastName) && regexpPhoneNumber.test(phoneNumber) &&
-            regexpEmail.test(email) && regexpPassword.test(password) && regexpPassword.test(confirmPassword)) {
+        if (NAME_REGEXP.test(firstName) && NAME_REGEXP.test(lastName) && PHONE_NUMBER_REGEXP.test(phoneNumber) &&
+            EMAIL_REGEXP.test(email) && PASSWORD_REGEXP.test(password) && PASSWORD_REGEXP.test(confirmPassword)) {
 
             form.innerText = "";
             const blockCompleteForm = document.createElement("div");
@@ -144,7 +218,7 @@ document.forms.publish.onsubmit = function (e) {
             console.log("Email " + email)
             console.log("Password " + password)
 
-        }else{
+        } else {
             isEmail(email, inputUserEmail)
             isPhoneNumber(phoneNumber, inputUserPhone)
             isUserLastName(lastName, inputUserLastName)
