@@ -1,15 +1,15 @@
-const TAMAGOTCHI_CONTAINER = document.getElementById("block-tamagotchi");
+const tamagotchi_container = document.getElementById("block-tamagotchi");
 
 
-const ACTIONS_TAMAGOTCHI = document.createElement('div');
-ACTIONS_TAMAGOTCHI.className = "actions_tamagotchi";
-const IMAGE_TAMAGOTCHI = document.createElement("img");
-IMAGE_TAMAGOTCHI.src = "image/noun-laughing-2203586.svg";
-IMAGE_TAMAGOTCHI.alt = "happy";
+const actionsTamagotchi = document.createElement('div');
+actionsTamagotchi.className = "actions_tamagotchi";
+const imageTamagotchi = document.createElement("img");
+imageTamagotchi.src = "image/noun-laughing-2203586.svg";
+imageTamagotchi.alt = "happy";
 
 
-TAMAGOTCHI_CONTAINER.appendChild(IMAGE_TAMAGOTCHI);
-TAMAGOTCHI_CONTAINER.appendChild(ACTIONS_TAMAGOTCHI);
+tamagotchi_container.appendChild(imageTamagotchi);
+tamagotchi_container.appendChild(actionsTamagotchi);
 
 
 class Tamagotchi {
@@ -22,16 +22,11 @@ class Tamagotchi {
         this.namePlay = "play";
         this.block = document.getElementById("block-tamagotchi")
 
-    }
-}
-
-class CommunicationTamagotchi extends Tamagotchi {
-    constructor(health, hungry, nameHealth, nameHungry, play, namePlay) {
-        super(health, hungry, nameHealth, nameHungry, play, namePlay);
-
         this.healthLowInterval = 2;
         this.hungryLowInterval = 1;
         this.playLowInterval = 3;
+
+
     }
 
     healthInterval = () => {
@@ -50,6 +45,8 @@ class CommunicationTamagotchi extends Tamagotchi {
     };
 
     upHealth = () => {
+
+
         if (this.health < 100 && this.health > 0) {
             if (this.health >= 100) {
                 this.health = 100
@@ -116,11 +113,12 @@ class CommunicationTamagotchi extends Tamagotchi {
                 this.gameOver();
                 exitTamagotchi(hungryTamagotchi);
             }
-        }, 1000)
+        }, 700)
     }
 
 
     playInterval = () => {
+        console.log(this.play)
         const playTamagotchi = setInterval(() => {
             if (this.play > this.playLowInterval) {
                 this.yourTamagotchi()
@@ -132,8 +130,26 @@ class CommunicationTamagotchi extends Tamagotchi {
                 this.gameOver();
                 exitTamagotchi(playTamagotchi);
             }
-        }, 1000)
+        }, 1500)
     }
+
+    // interval = (el, lowInterval, name) => {
+    //
+    //      const doTamagotchi =setInterval(() => {
+    //         if (el > lowInterval) {
+    //             console.log(lowInterval)
+    //
+    //             el = el - lowInterval;
+    //             console.log('value '+ el)
+    //             const progress = document.getElementById(name);
+    //             progress.value = el
+    //         } else {
+    //             el = 0;
+    //             this.gameOver();
+    //             exitTamagotchi(doTamagotchi);
+    //         }
+    //     }, 1000)
+    // }
 
     upPlay = () => {
         if (this.play > 0) {
@@ -164,18 +180,34 @@ class CommunicationTamagotchi extends Tamagotchi {
         }
     }
 
+    playTamagotchi() {
+
+        this.playInterval();
+        this.progressBar(this.play, this.namePlay, this.upPlay)
+    }
+
+    hungryTamagotchi() {
+        this.hungryInterval()
+        this.progressBar(this.hungry, this.nameHungry, this.upHungry);
+    }
+
+    healthTamagotchi() {
+        this.healthInterval()
+        this.progressBar(this.health, this.nameHealth, this.upHealth);
+    }
+
     yourTamagotchi() {
         if (this.health >= 70 && this.play >= 70 && this.hungry >= 70) {
-            IMAGE_TAMAGOTCHI.src = "image/noun-laughing-2203586.svg";
-            IMAGE_TAMAGOTCHI.alt = "happy";
+            imageTamagotchi.src = "image/noun-laughing-2203586.svg";
+            imageTamagotchi.alt = "happy";
         } else if (this.play < 70 && this.play > 40 || this.health < 70 && this.health > 40 || this.hungry < 70
             && this.hungry > 40) {
-            IMAGE_TAMAGOTCHI.src = "image/noun-dizzy-2203580.svg";
-            IMAGE_TAMAGOTCHI.alt = "happy";
+            imageTamagotchi.src = "image/noun-dizzy-2203580.svg";
+            imageTamagotchi.alt = "happy";
         } else if (this.play <= 40 && this.play >= 20 || this.health <= 40 && this.health >= 20 || this.hungry <= 40
             && this.hungry >= 20) {
-            IMAGE_TAMAGOTCHI.src = "image/noun-angry-2203572.svg";
-            IMAGE_TAMAGOTCHI.alt = "angry";
+            imageTamagotchi.src = "image/noun-angry-2203572.svg";
+            imageTamagotchi.alt = "angry";
         }
     }
 
@@ -201,7 +233,7 @@ class CommunicationTamagotchi extends Tamagotchi {
 
         blockGameTamagotchi.appendChild(button);
         blockGameTamagotchi.appendChild(progressBarElement)
-        ACTIONS_TAMAGOTCHI.appendChild(blockGameTamagotchi)
+        actionsTamagotchi.appendChild(blockGameTamagotchi)
 
     }
 
@@ -211,9 +243,9 @@ class CommunicationTamagotchi extends Tamagotchi {
         this.health = 0;
         this.play = 0;
 
-        ACTIONS_TAMAGOTCHI.innerHTML = "";
-        IMAGE_TAMAGOTCHI.src = "image/noun-dead-2203583.svg";
-        IMAGE_TAMAGOTCHI.alt = "angry";
+        actionsTamagotchi.innerHTML = "";
+        imageTamagotchi.src = "image/noun-dead-2203583.svg";
+        imageTamagotchi.alt = "angry";
 
         const theEndGameTamagotchi = document.createElement("div");
         const textEndGame = document.createElement("p");
@@ -235,7 +267,7 @@ class CommunicationTamagotchi extends Tamagotchi {
 
         theEndGameTamagotchi.appendChild(textEndGame);
         theEndGameTamagotchi.appendChild(buttonRestartGame);
-        ACTIONS_TAMAGOTCHI.appendChild(theEndGameTamagotchi);
+        actionsTamagotchi.appendChild(theEndGameTamagotchi);
 
     }
 
@@ -244,7 +276,7 @@ class CommunicationTamagotchi extends Tamagotchi {
         this.hungry = 100;
         this.play = 100;
 
-        ACTIONS_TAMAGOTCHI.innerHTML = "";
+        actionsTamagotchi.innerHTML = "";
         this.progressBar(this.health, this.nameHealth, this.upHealth);
 
         this.progressBar(this.hungry, this.nameHungry, this.upHungry);
@@ -254,6 +286,7 @@ class CommunicationTamagotchi extends Tamagotchi {
         this.healthInterval();
         this.hungryInterval();
         this.playInterval();
+
     }
 }
 
@@ -261,16 +294,15 @@ const exitTamagotchi = (value) => {
     clearInterval(value)
 }
 
-const communicationTamagotchi = new CommunicationTamagotchi();
-
-communicationTamagotchi.progressBar(communicationTamagotchi.health, communicationTamagotchi.nameHealth, communicationTamagotchi.upHealth);
-communicationTamagotchi.progressBar(communicationTamagotchi.hungry, communicationTamagotchi.nameHungry, communicationTamagotchi.upHungry);
-communicationTamagotchi.progressBar(communicationTamagotchi.play, communicationTamagotchi.namePlay, communicationTamagotchi.upPlay);
-
-communicationTamagotchi.healthInterval();
-communicationTamagotchi.hungryInterval();
-communicationTamagotchi.playInterval();
+const communicationTamagotchi = new Tamagotchi();
 
 
+const startButton = document.getElementById("button_start")
 
+startButton.addEventListener("click", () => {
+    startButton.className = "start-button"
 
+    communicationTamagotchi.playTamagotchi();
+    communicationTamagotchi.hungryTamagotchi()
+    communicationTamagotchi.healthTamagotchi()
+})

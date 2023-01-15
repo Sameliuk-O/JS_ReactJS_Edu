@@ -30,3 +30,7 @@ margin: 8px 0;
 .actions_tamagotchi{
     margin: 0 auto;
 }
+
+.start-button{
+    display: none;
+}
