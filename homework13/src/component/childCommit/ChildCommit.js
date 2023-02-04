@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {getChildCommit} from "../../action/GetChildCommits";
 import {useEffect} from "react";
-import {Box, Button, Card, CardContent, Typography} from "@mui/material";
+import {Box, Card, CardContent, Typography} from "@mui/material";
 
 export const ChildCommit = ({isShowChildCommits, commits}) => {
 
