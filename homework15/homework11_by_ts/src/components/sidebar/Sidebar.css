@@ -1,0 +1,24 @@
+.Sidebar{
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #FCE7CC;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.nav-block{
+padding: 8px 0;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+.active{
+    background-color: #818181;
+    color: #FCE7CC;
+}
