@@ -8,29 +8,29 @@ export type User = {
 
 
 export type Post = {
-    idUser: any;
+    idUser: number;
     idPost: number;
     title: string;
     body: string
 }
 
 export type deletePost = {
-    idUser: any;
-    idPost: any;
+    idUser: number;
+    idPost: number;
 }
 
 export type viewPost = {
-    idUser: any,
+    idUser: number,
     allPosts: []
 }
 
 export type viewPaginationPostsLink = {
-    idUser: any
-    skip: any,
-    take: any
+    idUser: number
+    skip: number,
+    take: number
 }
 
 export type viewPaginationPosts = {
-    idUser: any,
+    idUser: number,
     data: []
 }

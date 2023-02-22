@@ -51,7 +51,7 @@ export class UserService {
         return userLogin
     }
 
-    async createPost(title: string, body: string, idUser: any): Promise<Post> {
+    async createPost(title: string, body: string, idUser: number | string): Promise<Post> {
         idUser = (Number(idUser))
 
         const post: Post = {
@@ -67,7 +67,7 @@ export class UserService {
         return post
     }
 
-    async deleteUserPost(idUser: any, idPost: any) {
+    async deleteUserPost(idUser: number, idPost: number | string) {
 
         const deletePost: deletePost = {
             idUser: Number(idUser),
@@ -78,7 +78,7 @@ export class UserService {
         this.db[idUser].posts.splice(postIndex, 1)
     }
 
-    async editPost(title: string, body: string, idUser: any, idPost: any): Promise<Post> {
+    async editPost(title: string, body: string, idUser: number, idPost: number | string): Promise<Post> {
 
         const editPost: Post = {
             idUser: Number(idUser),
@@ -99,7 +99,7 @@ export class UserService {
         return editPost
     }
 
-    async viewUserPosts(idUser: any, allPosts: [] = []): Promise<viewPost> {
+    async viewUserPosts(idUser: number | string, allPosts: [] = []): Promise<viewPost> {
 
         const viewPost: viewPost = {
             idUser: Number(idUser),
@@ -111,7 +111,7 @@ export class UserService {
         return viewPost
     }
 
-    async viewPaginationPosts(idUser: number, skip: any, take: any, data: [] = []): Promise<viewPaginationPosts> {
+    async viewPaginationPosts(idUser: number, skip: number | string, take: number | string, data: [] = []): Promise<viewPaginationPosts> {
 
         const viewPaginationPost: viewPaginationPosts = {
             idUser: Number(idUser),

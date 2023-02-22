@@ -42,7 +42,7 @@ export class UserController {
     createPost = async (req: Request, res: Response) => {
 
         const {title, body} = req.body;
-        const idUser: any = req.params.idUser
+        const idUser: string = req.params.idUser
         const createPost = await userService.createPost(title, body, idUser);
 
         res.send(createPost)
@@ -51,7 +51,7 @@ export class UserController {
     deletePost = async (req: Request, res: Response) => {
 
         const idUser: any = req.params.idUser
-        const idPost: any = req.params.idPost
+        const idPost: string = req.params.idPost
         const deletePost = await userService.deleteUserPost(idUser, idPost);
 
         res.send(deletePost)
@@ -62,7 +62,7 @@ export class UserController {
 
         const {title, body} = req.body;
         const idUser: any = req.params.idUser
-        const idPost: any = req.params.idPost
+        const idPost: string = req.params.idPost
         const editUserPost = await userService.editPost(title, body, idUser, idPost);
 
         res.send(editUserPost)
@@ -82,8 +82,8 @@ export class UserController {
     viewPaginationPosts = async (req: Request, res: Response) => {
 
         const idUser: any = req.params.idUser
-        const skip: any = req.params.skip
-        const take: any = req.params.take
+        const skip: string = req.params.skip
+        const take: string = req.params.take
         const data: [] = []
         const viewPaginationPosts = await userService.viewPaginationPosts(idUser, skip, take, data);
 
