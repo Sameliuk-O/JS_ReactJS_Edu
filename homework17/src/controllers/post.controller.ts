@@ -15,8 +15,8 @@ export class PostController {
 
     deletePost = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const idUser: any = req.params.idUser
-            let idPost: any = req.params.idPost
+            const idUser: string = req.params.idUser
+            let idPost: string = req.params.idPost
 
             if (!await PostModel.findOne({_id: idPost})) {
                 throw  new HttpError(404, "Id Post is not exist", "Delete Post")
@@ -25,8 +25,8 @@ export class PostController {
             const deletePost = await postsService.deleteUserPost(idUser, idPost);
 
             res.send(deletePost)
-        } catch (e: any) {
-            console.log("Error throwed:", e.message)
+        } catch (e) {
+            console.log("Error throwed:", e)
             next(e)
         }
 
@@ -35,7 +35,7 @@ export class PostController {
     editPost = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const {title, body} = req.body;
-            const idUser: any = req.params.idUser
+            const idUser: string = req.params.idUser
             const idPost: string = req.params.idPost
 
             if (!await PostModel.findOne({_id: idPost})) {
@@ -45,8 +45,8 @@ export class PostController {
             const editUserPost = await postsService.editPost(title, body, idUser, idPost);
 
             res.send(editUserPost)
-        } catch (e: any) {
-            console.log("Error throwed:", e.message)
+        } catch (e) {
+            console.log("Error throwed:", e)
             next(e)
         }
 

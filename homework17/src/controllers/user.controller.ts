@@ -32,8 +32,8 @@ export class UserController {
             const user = await userService.addUser(login, password);
             res.send(user)
 
-        } catch (e: any) {
-            console.log("Error throwed:", e.message)
+        } catch (e) {
+            console.log("Error throwed:", e)
             next(e)
         }
 
@@ -57,8 +57,8 @@ export class UserController {
             const response = await userService.login(login, password)
 
             res.send(response)
-        } catch (e: any) {
-            console.log("Error throwed:", e.message)
+        } catch (e) {
+            console.log("Error throwed:", e)
             next(e)
         }
     }
@@ -71,9 +71,9 @@ export class UserController {
             const createPost = await postsService.createPost(title, body, idUser);
 
             res.send(createPost)
-        } catch (e: any) {
+        } catch (e) {
 
-            console.log("Error throwed:", e.message)
+            console.log("Error throwed:", e)
             next(e)
 
         }
@@ -90,8 +90,8 @@ export class UserController {
             const viewPaginationPosts = await postsService.viewPaginationPosts(idUser, skip, take);
 
             res.send(viewPaginationPosts)
-        } catch (e: any) {
-            console.log("Error throwed:", e.message)
+        } catch (e) {
+            console.log("Error throwed:", e)
             next(e)
         }
 
