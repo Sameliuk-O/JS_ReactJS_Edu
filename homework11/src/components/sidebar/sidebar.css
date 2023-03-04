@@ -1,4 +1,4 @@
-.Sidebar{
+.sidebar {
     height: 100%;
     width: 250px;
     position: fixed;
@@ -10,15 +10,15 @@
     padding-top: 20px;
 }
 
-.nav-block{
-padding: 8px 0;
+.nav-block {
+    padding: 8px 0;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
     display: block;
 }
 
-.active{
+.active {
     background-color: #818181;
     color: #FCE7CC;
 }
