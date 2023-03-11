@@ -1,18 +1,14 @@
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import {CardActionArea} from '@mui/material';
-import {UserCardContainer} from "./styles";
-
+import { CardContent, CardMedia, Typography, CardActionArea, Box } from '@mui/material';
 
 const UserCard = ({user}) => {
 
     return (
-        <UserCardContainer>
+        <Box maxWidth={350} minWidth={340} margin={1} marginTop={3} flexGrow={1}>
             <CardActionArea>
                 <CardMedia
                     component="img"
-                    height="140"
+                    height="350"
+
                     image={`${user.image}`}
                     alt="green iguana"
                 />
@@ -34,7 +30,7 @@ const UserCard = ({user}) => {
                     </Typography>
                 </CardContent>
             </CardActionArea>
-        </UserCardContainer>
+        </Box>
     );
 }
 
