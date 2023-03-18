@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-
+import {useSelector} from "react-redux";
 
 const stories = createSlice({
         name: 'stories',
@@ -10,23 +10,18 @@ const stories = createSlice({
             itemsCommits: [],
             itemsOneStories: {},
             itemChildCommits: []
-            // isError: false
         },
         reducers: {
-
             setStories(state, action) {
                 return {
                     ...state,
-
                     items: [...action.payload],
                     isLoading: false
                 }
-
             },
             setStoriesCard(state, action) {
                 return {
                     ...state,
-
                     itemsCard: action.payload ? [...action.payload] : [],
                     isLoading: false
                 }
@@ -39,48 +34,41 @@ const stories = createSlice({
             },
 
             setStoriesCommits(state, action) {
-                // console.log(action)
                 return {
                     ...state,
-
                     itemsCommits: action.payload ? [...action.payload] : [],
                     isLoading: false
-
                 }
             },
 
             setChildCommit(state, action) {
-                console.log(action)
-
                 return {
                     ...state,
-
-                    itemChildCommits: action.payload ? [...action.payload]: [],
+                    itemChildCommits: action.payload ? [...action.payload] : [],
                     isLoading: false
                 }
             },
 
             setOneStoriesItem(state, action) {
-                console.log(action)
                 return {
                     ...state,
-                    itemsOneStories: action.payload ? {...action.payload
-            } : {},
+                    itemsOneStories: action.payload ? {
+                        ...action.payload
+                    } : {},
                     isLoading: false
                 }
-
             }
-            // setIsError(state, action) {
-            //     return{
-            //         ...state,
-            //         isLoading: action.payload
-            //     }
-            // }
         }
-
     }
 )
 
 export default stories.reducer
-export const {setIsError, setIsLoading, setStories, setStoriesCard, setStoriesCommits, setOneStoriesItem, setChildCommit} = stories.actions
+export const {
+    setIsLoading,
+    setStories,
+    setStoriesCard,
+    setStoriesCommits,
+    setOneStoriesItem,
+} = stories.actions
 
+export const useStoriesSelector = () => useSelector((state) => state.stories);

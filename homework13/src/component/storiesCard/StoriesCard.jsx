@@ -1,42 +1,44 @@
-import {Box, Button, Card, CardActions, CardContent, Typography} from "@mui/material";
-import stories from "../../store/stories";
-import {useDispatch, useSelector} from "react-redux";
-import {getStoriesCard} from "../../action/GetStoriesCard";
 import {useEffect} from "react";
+import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 
+import {Box, Button, Card, CardActions, CardContent, Typography} from "@mui/material";
+
+import {getStoriesCard} from "../../action/get-stories-card";
+import {useStoriesSelector} from "../../store/stories";
+import {convertTime} from "../../utils/convertTime/convertTime";
+import {Loading} from "../loading";
+
 export const StoriesCard = () => {
-
-
     const dispatchStoriesCard = useDispatch()
+    const {itemsCard, items, isLoading} = useStoriesSelector();
 
-    const {stories} = useSelector((state) => ({stories: state.stories || []}));
     useEffect(() => {
-        dispatchStoriesCard(getStoriesCard(stories.items))
-    }, [stories.items])
-
+        if (!itemsCard.length && items) {
+            dispatchStoriesCard(getStoriesCard(items))
+        }
+    }, [items])
 
     return (
-
         <Box>
-            {stories.itemsCard && stories.itemsCard.map((el) => (
-                <Box sx={{margin: '20px'}} key={el.id}>
-                    <Card sx={{minWidth: 275}}>
+            {!isLoading ? itemsCard && itemsCard.map((el) => (
+                <Box margin={'20px'} key={el.id}>
+                    <Card sx={{minWidth: "275px"}}>
                         <CardContent>
-                            <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
+                            <Typography fontSize={14} color={"text.secondary"} gutterBottom>
                                 HackerNews
                             </Typography>
                             <Typography variant="h5" component="div">
                                 {el.title}
                             </Typography>
-                            <Typography sx={{mb: 1.5}} color="text.secondary">
+                            <Typography mb={1.5} color="text.secondary">
                                 Author: {el.by}
                             </Typography>
                             <Typography variant="body2">
                                 Score: {el.score}
                             </Typography>
                             <Typography variant="body2">
-                                Date publication: {new Date(el.time * 1000).toLocaleString()}
+                                Date publication: {convertTime(el.time)}
                             </Typography>
                         </CardContent>
                         <CardActions>
@@ -47,12 +49,7 @@ export const StoriesCard = () => {
                         </CardActions>
                     </Card>
                 </Box>
-
-
-            ))}
-
-
+            )) : <Loading/>}
         </Box>
-
     );
 }

@@ -1,11 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
 import {useRoutes} from "react-router-dom";
+
 import {HomePage} from "./page/HomePage";
 import {Card} from "./page/Card";
+import {ErrorPage} from "./page/ErrorPage";
+
+import './App.css';
 
 function App() {
-  const elements = useRoutes([
+  return useRoutes([
     {
       path: '/',
       element: <HomePage/>
@@ -13,10 +15,12 @@ function App() {
     {
       path: `/story/:storiesId`,
       element: <Card/>
+    },
+    {
+      path: '*',
+      element: <ErrorPage/>
     }
-  ])
-
-  return elements;
+  ]);
 }
 
 export default App;
