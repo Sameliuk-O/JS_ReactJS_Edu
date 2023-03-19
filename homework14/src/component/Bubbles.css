@@ -1,5 +1,5 @@
-.bubbles{
-    position : absolute;
+.bubbles {
+    position: absolute;
     background-color: Red;
     border-radius: 50%;
     width: 50px;
@@ -7,6 +7,6 @@
     border: 1px solid black
 }
 
-.bubbles:hover{
+.bubbles:hover {
     background-color: yellow;
 }
