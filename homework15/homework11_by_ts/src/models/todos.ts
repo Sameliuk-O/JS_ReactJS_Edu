@@ -1,4 +1,4 @@
-export  interface TodoProps {
+export interface TodoProps {
     userId: number;
     id: number;
     title: string;

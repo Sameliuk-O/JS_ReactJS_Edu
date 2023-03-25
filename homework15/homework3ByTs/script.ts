@@ -8,28 +8,30 @@ function validCallbackName(item: number, array: string[]): string {
     return array[item] = [firstLater, ...rest].join("")
 }
 
-function validMethodName(array: string[], callback: (i: number, array: string[]) => string): void {
+type ValidMethodName = (array: string[], callback: (i: number, array: string[]) => string) => void
+const validMethodName: ValidMethodName = (array, callback): void => {
     for (let i = 0; i < array.length; i++) {
         callback(i, array)
     }
-    return console.log(array.join(""))
+    console.log(array.join(""))
 }
 
 validMethodName(["my", "name", "is", "Vasya"], validCallbackName);
 
-function validCallbackNumber(array: number[], item: number): number {
+type ValidCallbackNumber = (array: number[], item: number) => number
+const validCallbackNumber: ValidCallbackNumber = (array, item) => {
     return array[item] = array[item] * 100;
 }
 
-function validMethodNumber(array: number[], callback: (array: number[], i: number) => number): void {
+type ValidMethodNumber = (array: number[], callback: (array: number[], i: number) => number) => void
+const validMethodNumber: ValidMethodNumber = (array, callback) => {
     for (let i = 0; i < array.length; i++) {
         callback(array, i)
     }
-    return console.log(array.join(', '))
+    console.log(array.join(', '))
 }
 
 validMethodNumber([1, 2, 3], validCallbackNumber);
-
 
 interface ValueValidMethodObject {
     age: number,
@@ -40,7 +42,8 @@ function validCallbackObject(item: number, array: ValueValidMethodObject[]): str
     return `${array[item].name} is ${array[item].age}`
 }
 
-function validMethodObject(array: ValueValidMethodObject[], callback: (item: number, array: ValueValidMethodObject[]) => string): void {
+type ValidMethodObject = (array: ValueValidMethodObject[], callback: (item: number, array: ValueValidMethodObject[]) => string) => void
+const validMethodObject: ValidMethodObject = (array, callback) => {
     for (let i = 0; i < array.length; i++) {
         callback(i, array)
     }
@@ -55,17 +58,21 @@ validMethodObject([{
     name: 'Aaron'
 }], validCallbackObject);
 
-function reversCallbackItem(item: number, array: string[]): string {
+type ReversCallbackItem = (item: number, array: string[]) => string
+
+const reversCallbackItem: ReversCallbackItem = (item, array) => {
     const n = array[item].split("");
     const firstLater = n.reverse();
     return array[item] = firstLater.join("")
 }
 
-function reversMethodItem(array: string[], callback: (i: number, array: string[]) => string): void {
+type ReversMethodItem = (array: string[], callback: (i: number, array: string[]) => string) => void
+
+const reversMethodItem: ReversMethodItem = (array, callback) => {
     for (let i = 0; i < array.length; i++) {
         callback(i, array)
     }
-    return console.log("reversMethodItem, ", array.join(", "))
+    console.log("reversMethodItem, ", array.join(", "))
 }
 
 reversMethodItem(['abc', '123'], reversCallbackItem);
@@ -121,8 +128,11 @@ console.log("getPriceWithDiscount, ", price.getPriceWithDiscount());
 
 interface Numerator {
     value: number;
+
     double(): this;
+
     plusOne(): this;
+
     minusOne(): this;
 }
 
@@ -162,7 +172,7 @@ const getElementHeight = element.getHeight();
 console.log("getElementHeight, ", getElementHeight);
 
 // row function 4
-type ConvertToObjectProps = (num: number) => void
+type ConvertToObjectProps = (num: number) => { value: number, isOdd: boolean }
 const convertToObject: ConvertToObjectProps = (num) => {
     return {
         value: num,
@@ -172,9 +182,10 @@ const convertToObject: ConvertToObjectProps = (num) => {
 
 //Closser 5.1
 
+type Minus = (valueFirst: number) => (valueSecond: number) => number
 
-const minus = (valueFirst: number = 0) => {
-    return function (valueSecond: number = 0): number {
+const minus: Minus = (valueFirst = 0) => {
+    return function (valueSecond = 0) {
         return valueFirst - valueSecond;
     }
 }
@@ -183,8 +194,10 @@ console.log("minus, ", minus(75)(7))
 
 // // Closser 5.2
 
-const multiplyMaker = (number: number = 0): (number) => number => {
-    return function (nextNumber: number) {
+type MultiplyMaker = (number: number) => (nextNumber: number) => number
+
+const multiplyMaker: MultiplyMaker = (number = 0) => {
+    return function (nextNumber) {
         if (number === 0) {
             number = number * nextNumber;
             return number;
@@ -204,11 +217,13 @@ console.log("multiply,  ", multiply(10))
 //Closser 5.3
 interface RowOperation {
     addRow(): string;
+
     getRow(): string;
+
     lengthRow(): string;
 }
 
-const rowOperation: (value:  string | number) => void = (value:  any ): RowOperation => {
+const rowOperation: (value: string | number) => void = (value: any): RowOperation => {
     function addRow(): (any) {
         if (typeof value === "number") {
             value = value.toString();
@@ -224,7 +239,7 @@ const rowOperation: (value:  string | number) => void = (value:  any ): RowOpera
         return value;
     }
 
-    function lengthRow(): string  {
+    function lengthRow(): string {
         return value;
     }
 
@@ -292,9 +307,9 @@ console.log(modules.addValue(5).sum(5).degree(2).getValue())
 
 // // Function sum 6
 
-const sum: (value: number) => any = (...item: Array<number>): () => number => {
+const sum: (value: number) => any = (...item: number[]): () => number => {
     let result: number = item.reduce((a, b) => a + b, 0)
-    return function (...args: Array<number>): number {
+    return function (...args: number[]): number {
         let anotherNumber: number = args.reduce((a: number, b: number) => a + b, 0)
         if (anotherNumber) {
             return sum(result + anotherNumber)

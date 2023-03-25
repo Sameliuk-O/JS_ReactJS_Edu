@@ -3,7 +3,7 @@ import {Layout} from "../../components/layout/Layout";
 import {NavLink, useSearchParams} from "react-router-dom";
 import {TodoProps} from "../../models/todos";
 
-export type STATUSES = 'completed' | 'uncompleted';
+export type FilterState = 'completed' | 'uncompleted';
 export const AllToDos = () => {
     const [allToDos, setAllToDos] = useState<Array<TodoProps>>([]);
     const [filteredTodos, setFilteredTodos] = useState<Array<TodoProps>>([]);
@@ -22,8 +22,7 @@ export const AllToDos = () => {
     }, [])
 
 
-
-    const checkValue = (value: boolean, key: STATUSES) => {
+    const checkValue = (value: boolean, key: FilterState) => {
 
         if (value) {
             setFilteredOptions((prev) => ({...prev, [key]: key === 'completed'}))
@@ -57,7 +56,11 @@ export const AllToDos = () => {
 
 
     useEffect(() => {
-        const filteredData = allToDos?.filter((todo) => (todo.completed === filteredOptions.completed || todo.completed === filteredOptions.uncompleted));
+        const filteredData = allToDos?.filter(
+            ({completed}) => (
+                completed === filteredOptions.completed || completed === filteredOptions.uncompleted
+            )
+        );
 
         setFilteredTodos(filteredData);
 
@@ -88,14 +91,14 @@ export const AllToDos = () => {
         <Layout>
             <div>
                 <input type="checkbox" name="completed" onChange={(e) => checkValue(e.target.checked, 'completed')}/>
-                <label htmlFor="completed" style={{margin:"10px 20px 0 0"}}>Completed </label>
+                <label htmlFor="completed" style={{margin: "10px 20px 0 0"}}>Completed </label>
                 <input type="checkbox" name="isPerformed"
                        onChange={(e) => checkValue(e.target.checked, 'uncompleted')}/>
-                <label htmlFor="isPerformed" style={{margin:"10px 20px 0 0"}}>Is Performed</label>
+                <label htmlFor="isPerformed" style={{margin: "10px 20px 0 0"}}>Is Performed</label>
 
                 <input type="text" name="searchTitle" value={searchToDoValue}
                        onChange={(e) => searchToDo(e.target.value)}/>
-                <label htmlFor="searchTitle" > Search Title</label>
+                <label htmlFor="searchTitle"> Search Title</label>
             </div>
             <div>
                 {(filteredOptions.completed !== null || filteredOptions.uncompleted !== null || searchToDoValue !== "" ? filteredTodos : allToDos)?.map((allToDo) =>

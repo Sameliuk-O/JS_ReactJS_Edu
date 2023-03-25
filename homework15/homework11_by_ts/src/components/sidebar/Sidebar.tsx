@@ -1,14 +1,19 @@
-import {Link, NavLink, Route} from "react-router-dom";
-import logo from '../../logo.svg';
-import "./Sidebar.css";
 import {useEffect, useState} from "react";
-import {getUsers} from "../../pages/utils";
+import {Link, NavLink} from "react-router-dom";
+
 import {UserProps} from "../../models/user";
+
+import "./Sidebar.css";
+
+import logo from '../../logo.svg';
 
 export const Sidebar = () => {
     const [users, setUsers] = useState<Array<UserProps>>([]);
+
     useEffect(() => {
-        getUsers(setUsers)
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then((response) => response.json())
+            .then((data: Array<UserProps>) => setUsers(data));
     }, [])
 
 
